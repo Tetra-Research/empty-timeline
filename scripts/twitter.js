@@ -2,9 +2,9 @@
 // then hide the specific element
 
 console.log("Content script is running!");
-console.log(document.body.style.backgroundColor);
-document.body.style.backgroundColor = "lightblue";
-console.log(document.body.style.backgroundColor);
+// console.log(document.body.style.backgroundColor);
+// document.body.style.backgroundColor = "lightblue";
+// console.log(document.body.style.backgroundColor);
 
 // const hideReactRoot = () => {
 // 	let reactRoot = document.getElementById("react-root");
@@ -22,7 +22,7 @@ console.log(document.body.style.backgroundColor);
 
 const hidePrimaryColumn = () => {
 	primaryColumn = document.querySelector('div[data-testid="primaryColumn"]');
-	if (primaryColumn) {
+	if (primaryColumn && primaryColumn.style.display != "none") {
 		console.log("found column");
 		primaryColumn.style.display = "none";
 	}
