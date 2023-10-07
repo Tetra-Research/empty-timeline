@@ -12,13 +12,8 @@
 	"action": {
 		"default_icon": {
 			"16": "images/icon-16.png"
-		}
+		},
+		"default_popup": "popup/index.html"
 	},
-	"permissions": ["scripting", "activeTab"],
-	"content_scripts": [
-		{
-			"matches": ["https://twitter.com/*"],
-			"js": ["scripts/twitter.js"]
-		}
-	]
+	"permissions": ["scripting", "activeTab", "storage"]
 }

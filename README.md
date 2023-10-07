@@ -16,3 +16,12 @@ the order i should tackle those is pretty clear
 5. then come back to refactor and upgrade
 
 sounds like a plan to me fam
+
+#### storage
+
+using storage.local
+https://developer.chrome.com/docs/extensions/reference/storage/#property-local
+
+added a permission for that in the manifest
+
+this will not sync state across installations like storage.sync will, but i'm not worried about that right now. easy upgrade later I'd think

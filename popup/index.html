@@ -1,0 +1,43 @@
+<html class="bg-black"">
+	<head>
+		<!-- <link rel="stylesheet" href="popup.css" /> -->
+		<script src="https://cdn.tailwindcss.com"></script>
+	</head>
+	<body class="w-[400px] h-[400px] p-4 bg-white">
+		<header class="flex flex-row w-full justify-between items-center">
+			<div><span>Empty</span></div>
+			<div class="flex flex-row justify-end gap-x-4 items-center">
+				<button>m</button>
+				<button>x</button>
+			</div>
+		</header>
+
+		
+		<div class="block mb-4">
+			<div class="border-b border-gray-200">
+				<nav class="-mb-px flex" aria-label="Tabs">
+				<a 
+					data-tab="twitter"
+					href="#" 
+					class="tab border-indigo-500 text-indigo-600 w-1/2 border-b-2 py-4 px-1 text-center text-sm font-medium">Twitter</a>
+				<a 
+					data-tab="linkedin"
+					href="#" 
+					class="tab border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 w-1/2 border-b-2 py-4 px-1 text-center text-sm font-medium">LinkedIn</a>
+				</nav>
+			</div>
+		</div>
+
+		<div data-content="twitter" class="tab-content">
+			<p>This is the Twitter content.</p>
+		</div>
+
+		<div data-content="linkedin" class="tab-content hidden">
+			<p>This is the LinkedIn content.</p>
+		</div>
+
+
+
+		<script src="popup.js"></script>
+	</body>
+</html>
