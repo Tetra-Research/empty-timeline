@@ -1,14 +1,24 @@
 <html class="bg-black m-8">
 	<head>
-		<!-- <link rel="stylesheet" href="popup.css" /> -->
 		<script src="https://cdn.tailwindcss.com"></script>
 	</head>
 	<body class="w-[400px] h-[400px] p-4 bg-white">
 		<header class="flex flex-row w-full justify-between items-center">
 			<div><span>Empty</span></div>
 			<div class="flex flex-row justify-end gap-x-4 items-center">
-				<button>m</button>
-				<button>x</button>
+				<!-- Other high level options --- overall enable toggle? -->
+				<button id="exit" class="hover:text-indigo-600">
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						viewBox="0 0 20 20"
+						fill="currentColor"
+						class="w-5 h-5"
+					>
+						<path
+							d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z"
+						/>
+					</svg>
+				</button>
 			</div>
 		</header>
 
@@ -31,12 +41,12 @@
 			</div>
 		</div>
 
-		<div data-content="twitter" class="tab-content">
-			<p>This is the Twitter content.</p>
+		<div data-content="twitter" class="tab-content gap-y-4">
+			<div>This is the Twitter content.</div>
 		</div>
 
-		<div data-content="linkedin" class="tab-content hidden">
-			<p>This is the LinkedIn content.</p>
+		<div data-content="linkedin" class="tab-content gap-y-4 hidden">
+			<div>This is the LinkedIn content.</div>
 		</div>
 
 		<script src="popup.js"></script>
