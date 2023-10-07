@@ -22,20 +22,16 @@ document.addEventListener("DOMContentLoaded", function () {
 				"hover:text-gray-700",
 			];
 
-			// remove active state
 			tabs.forEach((t) => {
 				t.classList.remove(...activeClasses);
 				t.classList.add(...defaultClasses);
-				// add default classes?
 			});
 
 			tab.classList.remove(...defaultClasses);
 			tab.classList.add(...activeClasses);
 
-			// Hide all content divs
 			content.forEach((content) => content.classList.add("hidden"));
 
-			// Show content div associated with clicked tab
 			document
 				.querySelector(`[data-content=${tab.getAttribute("data-tab")}]`)
 				.classList.remove("hidden");
@@ -71,19 +67,11 @@ document.addEventListener("DOMContentLoaded", function () {
 		],
 	};
 
-	// const options = [
-	// 	{ title: "Toggle 1", description: "Description for Toggle 1" },
-	// 	{ title: "Toggle 2", description: "Description for Toggle 2" },
-	// 	// more options...
-	// ];
-
 	Object.keys(settings).forEach((website) => {
 		const container = document.querySelector(`[data-content=${website}]`);
 		const options = settings[website];
 
 		options.forEach((option, i) => {
-			const concatId = `${option.website}-${option.id}`;
-
 			const toggleHtml = `
 				<div class="flex items-center justify-between mt-2">
 					<span class="flex flex-grow flex-col">
@@ -105,12 +93,14 @@ document.addEventListener("DOMContentLoaded", function () {
 						aria-checked="false"
 						aria-labelledby="toggle-title-${i}"
 						aria-describedby="toggle-desc-${i}"
-						data-option-button="${concatId}"
+						data-website="${website}"
+						data-option-id="${option.id}"
 					>
 						<span
 							aria-hidden="true"
 							class="translate-x-0 pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out"
-							data-option-span="${concatId}"
+							data-website="${website}"
+							data-option-id="${option.id}"
 						></span>
 					</button>
 				</div>
@@ -118,25 +108,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
 			container.insertAdjacentHTML("beforeend", toggleHtml);
 
-			document
-				.querySelector(`[data-option-button="${concatId}"]`)
-				.addEventListener("click", function () {
-					// Change the button's classes
-					this.classList.toggle("bg-gray-200");
-					this.classList.toggle("bg-indigo-600");
+			const button = container.querySelectorAll(
+				`button[type="button"][data-website="${website}"][data-option-id="${option.id}"]`
+			)[0];
 
-					// Get the data values
-					const optionId = this.getAttribute("data-option-id");
-					const website = this.getAttribute("data-website");
+			const span = container.querySelectorAll(
+				`span[data-website="${website}"][data-option-id="${option.id}"]`
+			)[0];
 
-					// Update local storage
-					const localStorageKey = `option:${website}:${optionId}`;
-					const currentValue = localStorage.getItem(localStorageKey);
-					localStorage.setItem(
-						localStorageKey,
-						currentValue === "true" ? "false" : "true"
-					);
-				});
+			button.addEventListener("click", () => {
+				button.classList.toggle("bg-indigo-600");
+				button.classList.toggle("bg-gray-200");
+				span.classList.toggle("translate-x-5");
+				span.classList.toggle("translate-x-0");
+
+				// add cloud logic
+			});
+
+			console.log("test", button, span);
 		});
 	});
 });
