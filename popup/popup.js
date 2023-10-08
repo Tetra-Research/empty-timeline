@@ -6,12 +6,12 @@ const settings = [
 			{
 				title: "Example 1",
 				id: "example-1",
-				description: "description",
+				description: "description 1",
 			},
 			{
 				title: "Example 2",
 				id: "example-2",
-				description: "description",
+				description: "description 2",
 			},
 		],
 	},
@@ -20,14 +20,14 @@ const settings = [
 		id: "linkedin",
 		options: [
 			{
-				title: "Example 1",
-				id: "example-1",
-				description: "description",
+				title: "Example 3",
+				id: "example-3",
+				description: "description 3",
 			},
 			{
-				title: "Example 2",
-				id: "example-2",
-				description: "description",
+				title: "Example 4",
+				id: "example-4",
+				description: "description 4",
 			},
 		],
 	},
@@ -44,6 +44,20 @@ const defaultTabClasses = [
 	"hover:border-gray-300",
 	"hover:text-gray-700",
 ];
+
+const activeToggleButtonClasses = ["bg-indigo-600"];
+const defaultToggleButtonClasses = ["bg-gray-200"];
+
+const activeToggleSpanClasses = ["translate-x-5"];
+const defaultToggleSpanClasses = ["translate-x-0"];
+
+// const button = e.target;
+// 	button.classList.toggle("bg-indigo-600");
+// 	button.classList.toggle("bg-gray-200");
+
+// 	const span = button.querySelector(`span`);
+// 	span.classList.toggle("translate-x-5");
+// 	span.classList.toggle("translate-x-0");
 
 function onTabClick(e) {
 	e.preventDefault();
@@ -85,13 +99,16 @@ function createTabs() {
 	});
 }
 
-function setupTabs() {
-	const container = document.querySelector(`nav[id="tab-container"]`);
-	createTabs().forEach((t) => container.appendChild(t));
-}
-
 function onToggleClick(e) {
 	e.preventDefault();
+
+	const button = e.target;
+	button.classList.toggle("bg-indigo-600");
+	button.classList.toggle("bg-gray-200");
+
+	const span = button.querySelector(`span`);
+	span.classList.toggle("translate-x-5");
+	span.classList.toggle("translate-x-0");
 }
 
 function createToggles(id) {
@@ -101,9 +118,27 @@ function createToggles(id) {
 
 	return website.options.map((option, i) => {
 		const toggle = template.content.cloneNode(true).querySelector("div");
+
 		const title = toggle.querySelector(`span[id="toggle-title"]`);
+		title.textContent = option.title;
+		title.setAttribute("id", `toggle-title-${i}`);
+
 		const desc = toggle.querySelector(`span[id="toggle-desc"]`);
-		const button = toggle.querySelector("button");
+		desc.textContent = option.description;
+		desc.setAttribute("id", `toggle-desc-${i}`);
+
+		const button = toggle.querySelector(`button[id="toggle-button"]`);
+		button.setAttribute("id", `toggle-button-${i}`);
+		button.setAttribute("data-website", website.id);
+		button.setAttribute("data-option-id", option.id);
+		button.addEventListener("click", onToggleClick);
+
+		const span = button.querySelector(`span[id="toggle-span"]`);
+		span.setAttribute("id", `toggle-span-${i}`);
+		span.setAttribute("data-website", website);
+		span.setAttribute("data-option-id", option.id);
+
+		return toggle;
 	});
 }
 function createSections() {
@@ -116,25 +151,18 @@ function createSections() {
 		section.setAttribute("data-content", id);
 		if (i !== 0) section.classList.add("hidden");
 
-		createToggles(id);
+		createToggles(id).forEach((t) => section.appendChild(t));
 
 		return section;
 	});
 }
 
-function setupSections() {
-	const container = document.getElementById("section-container");
-	createSections().forEach((t) => container.appendChild(t));
-}
-
 document.addEventListener("DOMContentLoaded", () => {
-	// Load from storage
-	// Load last tab
-	// Load current website
-	// Create tabs and navigate to correct one
-	setupTabs();
-	setupSections();
-	// Create toggles and initialize them
+	const tabContainer = document.querySelector(`nav[id="tab-container"]`);
+	createTabs().forEach((t) => tabContainer.appendChild(t));
+
+	const sectionContainer = document.getElementById("section-container");
+	createSections().forEach((t) => sectionContainer.appendChild(t));
 });
 
 // document.addEventListener("DOMContentLoaded", function () {
