@@ -7,7 +7,7 @@
 			<div><span>Empty</span></div>
 			<div class="flex flex-row justify-end gap-x-4 items-center">
 				<!-- Other high level options --- overall enable toggle? -->
-				<button id="exit" class="hover:text-indigo-600">
+				<button id="exit" class="hover:text-indigo-600" onclick="onClose()">
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						viewBox="0 0 20 20"
@@ -24,32 +24,69 @@
 
 		<div class="block mb-4">
 			<div class="border-b border-gray-200">
-				<nav class="-mb-px flex" aria-label="Tabs">
-					<!-- It would be cool if these were also automatically generated -->
-					<a
-						data-tab="twitter"
-						href="#"
-						class="tab border-indigo-500 text-indigo-600 w-1/2 border-b-2 py-4 px-1 text-center text-sm font-medium"
-						>Twitter</a
-					>
-					<a
-						data-tab="linkedin"
-						href="#"
-						class="tab border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 w-1/2 border-b-2 py-4 px-1 text-center text-sm font-medium"
-						>LinkedIn</a
-					>
+				<nav class="-mb-px flex" aria-label="Tabs" id="tab-container">
+					<!-- Tabs will be automatically generated based on settings file -->
 				</nav>
 			</div>
 		</div>
 
-		<!-- And these... -->
-		<div data-content="twitter" class="tab-content gap-y-4">
-			<!-- This area will be programmatically generated -->
-		</div>
+		<div id="section-container"></div>
+
+		<!-- <div data-content="twitter" class="tab-content gap-y-4">twitter</div>
 
 		<div data-content="linkedin" class="tab-content gap-y-4 hidden">
-			<!-- This area will be programmatically generated -->
-		</div>
+			linkedin
+		</div> -->
+
+		<template id="tab-template">
+			<a
+				data-tab=""
+				href="#"
+				onclick="onTabClick(event)"
+				class="tab w-1/2 border-b-2 py-4 px-1 text-center text-sm font-medium"
+			>
+			</a>
+		</template>
+
+		<template id="section-template">
+			<div data-content="" class="tab-content gap-y-4">
+				<!-- Toggles will be automatically generated based on settings file -->
+			</div>
+		</template>
+
+		<template id="toggle-template">
+			<div class="flex items-center justify-between mt-2">
+				<span class="flex flex-grow flex-col">
+					<span
+						class="text-sm font-medium leading-6 text-gray-900"
+						id="toggle-title"
+					>
+						<!-- ${option.title} -->
+					</span>
+					<span class="text-sm text-gray-500" id="toggle-desc">
+						<!-- ${option.description} -->
+					</span>
+				</span>
+
+				<button
+					type="button"
+					class="bg-gray-200 relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2"
+					role="switch"
+					aria-checked="false"
+					aria-labelledby="toggle-title"
+					aria-describedby="toggle-desc"
+					data-website="${website}"
+					data-option-id="${option.id}"
+				>
+					<span
+						aria-hidden="true"
+						class="translate-x-0 pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out"
+						data-website="${website}"
+						data-option-id="${option.id}"
+					></span>
+				</button>
+			</div>
+		</template>
 
 		<script src="popup.js"></script>
 	</body>
